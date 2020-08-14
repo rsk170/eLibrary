@@ -20,7 +20,7 @@ namespace eLibrary.Entities.Models
         [Required]
         public int CategoryId { get; set; }
 
-        public string? Location { get; set; }
+        public string Location { get; set; }
 
         [Display(Name = "Publish Date")]
         public DateTime? PublishDate { get; set; }

@@ -28,7 +28,7 @@ namespace eLibrary.Services
 
         public void SaveBook(Book book)
         {
-            if(book.Id == 0)
+            if (book.Id == 0)
             {
                 book.Availability = true;
                 _context.Books.Add(book);
@@ -77,7 +77,7 @@ namespace eLibrary.Services
         public Result DeleteBook(int id)
         {
             var book = GetBook(id);
-            if(book == null)
+            if (book == null)
             {
                 return Result.NotFound;
             }

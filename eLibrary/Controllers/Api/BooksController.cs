@@ -1,5 +1,4 @@
-﻿using eLibrary.Data;
-using eLibrary.Services;
+﻿using eLibrary.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eLibrary.Controllers.Api
@@ -8,14 +7,11 @@ namespace eLibrary.Controllers.Api
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private ApplicationDbContext _context;
-
         private BookService _books;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(BookService books)
         {
-            _context = context;
-            _books = new BookService(_context);
+            _books = books;
         }
 
         public IActionResult GetBooks(string query = null)

@@ -10,12 +10,9 @@ namespace eLibrary.Controllers
     {
         private BookService _books;
 
-        private ApplicationDbContext _context;
-
-        public BooksController(ApplicationDbContext context)
+        public BooksController(BookService books)
         {
-            _context = context;
-            _books = new BookService(_context);
+            _books = books;
         }
 
         public IActionResult Index()
