@@ -1,0 +1,56 @@
+﻿@model eLibrary.ViewModels.BookFormViewModel
+
+@{
+	ViewBag.Title = "BookForm";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.PageTitle</h2>
+
+@using (Html.BeginForm("Save", "Books"))
+{
+	@Html.ValidationSummary(true, "Please fix all errors on this page.")
+	<div class="form-group">
+		@Html.LabelFor(b => b.Title, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.Title, new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.Title)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.Author, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.Author, new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.Author)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.Location, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.Location, new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.Location)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.PublishDate, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.PublishDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.PublishDate)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.CategoryId, new { @class = "control-label" })
+		@Html.DropDownListFor(b => b.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Category", new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.CategoryId)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.Type, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.Type, new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.Type)
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(b => b.Description, new { @class = "control-label" })
+		@Html.TextBoxFor(b => b.Description, new { @class = "form-control" })
+		@Html.ValidationMessageFor(b => b.Description)
+	</div>
+	@Html.HiddenFor(b => b.Id)
+	@Html.AntiForgeryToken()
+	<button type="submit" class="btn btn-primary"> Save </button>
+}
+
+@section scripts
+{
+
+}
