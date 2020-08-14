@@ -7,12 +7,13 @@ namespace eLibrary.Entities.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter the book's title")]
         [StringLength(255)]
         public string Title { get; set; }
 
         public string Author { get; set; }
 
+        [Display(Name = "Category")]
         public Category Category { get; set; }
 
         [Display(Name = "Category")]
@@ -26,6 +27,7 @@ namespace eLibrary.Entities.Models
 
         public string Description { get; set; }
 
+        [Required]
         public string Type { get; set; }
 
         public bool Availability { get; set; }

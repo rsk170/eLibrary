@@ -1,0 +1,99 @@
+﻿@model IEnumerable<eLibrary.Entities.Models.Book>
+@{
+	ViewBag.Title = "Books";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> Books </h2>
+<p>
+	@Html.ActionLink("New Book", "New", "Books", null, new { @class = "btn btn-primary" })
+</p>
+<table id="books" class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th> Title </th>
+			<th> Author </th>
+			<th> Category </th>
+			<th> Location </th>
+			<th> Publish Date </th>
+			<th> Type </th>
+			<th> Availability </th>
+			<th> Delete </th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+@section Styles
+{
+	<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			var table = $("#books").DataTable({
+				ajax: {
+					url: "/api/books",
+					dataSrc: ""
+				},
+				columns: [
+					{
+						data: "title",
+						render: function (data, type, book) {
+							return "<a href='/books/edit/" + book.id + "'>" + book.title + "</a>";
+						}
+					},
+					{
+						data: "author"
+					},
+					{
+						data: "category"
+					},
+					{
+						data: "location"
+					},
+					{
+						data: "publishDate"
+					},
+					{
+						data: "type"
+					},
+					{
+						data: "availability",
+						render: function (data, type, row, meta) {
+							if (data == true) {
+								return "Available";
+							} else if (data == false) {
+								return "Not Available";
+							}
+						}
+					},
+					{
+						data: "id",
+						render: function (data) {
+							return "<button class='btn btn-danger btn-sm js-delete' data-book-id=" + data + ">Delete</button>";
+						}
+					}
+				]
+			});
+
+			$("#books").on("click", ".js-delete", function () {
+				var button = $(this);
+
+				if (confirm("Are you sure you want to delete this book?")) {
+					$.ajax({
+						url: "/api/books/" + button.attr("data-book-id"),
+						method: "DELETE",
+						success: function () {
+							table.row(button.parents("tr")).remove().draw();
+						}
+					});
+				}
+			});
+		});
+	</script>
+}
