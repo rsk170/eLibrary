@@ -7,7 +7,7 @@ namespace eLibrary.Controllers.Api
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private CategoryService _categories;
+        private readonly CategoryService _categories;
 
         public CategoriesController(CategoryService categories)
         {

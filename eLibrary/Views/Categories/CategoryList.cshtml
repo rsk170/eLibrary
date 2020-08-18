@@ -5,7 +5,7 @@
 <h2 style="margin:0 0 0 37%;"> Categories </h2>
 </br>
 <p>
-	@Html.ActionLink("New Category", "New", "Categories", null, new { @class = "btn btn-primary", @style = "height:50px; width:200px; margin:0 0 0 35%;" })
+	<a asp-action="New" asp-controller="Categories" class="btn btn-primary" style="height: 50px; width: 200px; margin: 0 0 0 35%;"> New Categoty </a>
 </p>
 </br>
 <table id="categories" class="table table-bordered table-hover dt-responsive nowrap" width="80%" cellspacing="0" align="center">

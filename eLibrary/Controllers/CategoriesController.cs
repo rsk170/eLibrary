@@ -7,7 +7,7 @@ namespace eLibrary.Controllers
 {
     public class CategoriesController : Controller
     {
-        private CategoryService _categories;
+        private readonly CategoryService _categories;
 
         public CategoriesController(CategoryService categories)
         {

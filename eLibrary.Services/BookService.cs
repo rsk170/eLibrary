@@ -9,7 +9,7 @@ namespace eLibrary.Services
 {
     public class BookService
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public BookService(ApplicationDbContext context)
         {
@@ -50,15 +50,15 @@ namespace eLibrary.Services
 
         public List<BookListingItem> GetAllBooks(string query = null)
         {
-            IQueryable<Book> booksQuery = _context.Books
-                .Include(b => b.Category);
+            var booksQuery = _context.Books
+                .Include(b => b.Category).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query))
             {
                 booksQuery = booksQuery.Where(b => b.Title.Contains(query));
             }
 
-            var bookListingItem = booksQuery.Select(b => new BookListingItem()
+            var bookListingItemsQuery = booksQuery.Select(b => new BookListingItem()
             {
                 Id = b.Id,
                 Title = b.Title,
@@ -71,7 +71,7 @@ namespace eLibrary.Services
                 Availability = b.Availability,
             });
 
-            return bookListingItem.ToList();
+            return bookListingItemsQuery.ToList();
         }
 
         public Result DeleteBook(int id)

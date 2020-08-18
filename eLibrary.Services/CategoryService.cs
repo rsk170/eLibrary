@@ -8,7 +8,7 @@ namespace eLibrary.Services
 {
     public class CategoryService
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public CategoryService(ApplicationDbContext context)
         {
@@ -22,20 +22,20 @@ namespace eLibrary.Services
 
         public List<CategoryListingItem> GetAllCategories(string query = null)
         {
-            IQueryable<Category> categoriesQuery = _context.Categories;
+            var categoriesQuery = _context.Categories.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query))
             {
                 categoriesQuery = categoriesQuery.Where(c => c.Name.Contains(query));
             }
 
-            var categoryListingItem = categoriesQuery.Select(c => new CategoryListingItem()
+            var categoryListingItemsQuery = categoriesQuery.Select(c => new CategoryListingItem()
             {
                 Id = c.Id,
                 Name = c.Name,
             });
 
-            return categoryListingItem.ToList();
+            return categoryListingItemsQuery.ToList();
         }
 
         public void SaveCategory(Category category)
