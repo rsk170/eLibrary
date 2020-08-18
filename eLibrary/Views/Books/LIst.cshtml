@@ -1,5 +1,4 @@
-﻿@model IEnumerable<eLibrary.Entities.Models.Book>
-@{
+﻿@{
 	ViewBag.Title = "Books";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,6 +6,7 @@
 <p>
 	@Html.ActionLink("New Book", "New", "Books", null, new { @class = "btn btn-primary" })
 </p>
+<p id="selectTriggerFilter"><label><b>Choose a category:</b></label><br></p>
 <table id="books" class="table table-bordered table-hover">
 	<thead>
 		<tr>
@@ -36,6 +36,27 @@
 	<script>
 		$(document).ready(function () {
 			var table = $("#books").DataTable({
+				"lengthMenu": [
+					[10, 25, 50, 100, -1],
+					[10, 25, 50, 100, "All"]
+				],
+				"dom": 'rtipS',
+				"searching": true,
+				"deferRender": true,
+				initComplete: function () {
+					var column = this.api().column(2);
+
+					var select = $('<select class="filter"><option value=""></option></select>')
+						.appendTo('#selectTriggerFilter')
+						.on('change', function () {
+							var val = $(this).val();
+							column.search(val ? '^' + $(this).val() + '$' : val, true, false).draw();
+						});
+
+					column.data().unique().sort().each(function (d, j) {
+						select.append('<option value="' + d + '">' + d + '</option>');
+					});
+				},
 				ajax: {
 					url: "/api/books",
 					dataSrc: ""
