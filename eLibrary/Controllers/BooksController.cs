@@ -7,7 +7,7 @@ namespace eLibrary.Controllers
 {
     public class BooksController : Controller
     {
-        private BookService _books;
+        private readonly BookService _books;
 
         public BooksController(BookService books)
         {

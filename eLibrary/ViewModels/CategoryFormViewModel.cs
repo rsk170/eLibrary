@@ -11,14 +11,6 @@ namespace eLibrary.ViewModels
         [StringLength(255)]
         public string Name { get; set; }
 
-        public string PageTitle
-        {
-            get
-            {
-                return Id != 0 ? "Edit Category" : "New Category";
-            }
-        }
-
         public CategoryFormViewModel()
         {
             Id = 0;

@@ -7,7 +7,7 @@ namespace eLibrary.Controllers.Api
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private BookService _books;
+        private readonly BookService _books;
 
         public BooksController(BookService books)
         {
