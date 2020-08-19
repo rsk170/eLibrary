@@ -17,6 +17,7 @@
 			<th> Publish Date </th>
 			<th> Type </th>
 			<th> Availability </th>
+			<th> Edit </th>
 			<th> Delete </th>
 		</tr>
 	</thead>
@@ -65,7 +66,7 @@
 					{
 						data: "title",
 						render: function (data, type, book) {
-							return "<a href='/books/edit/" + book.id + "'>" + book.title + "</a>";
+							return "<a href='/books/details/" + book.id + "'>" + book.title + "</a>";
 						}
 					},
 					{
@@ -91,6 +92,11 @@
 							} else if (data == false) {
 								return "Not Available";
 							}
+						}
+					},
+					{
+						render: function (data, type, book) {
+							return '<a class="btn btn-info" href="/books/edit/' + book.id + '">Edit</a>';
 						}
 					},
 					{

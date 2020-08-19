@@ -1,0 +1,49 @@
+﻿@model eLibrary.Entities.Models.Book
+
+@{
+	ViewBag.Title = Model.Title;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+	<h4 class="card-header"> Book Details </h4>
+	<div class="card-body">
+		<table>
+			<tr>
+				<td>
+					@*img*@
+				</td>
+				<td>&nbsp;</td>
+				<td style="vertical-align: top; text-align: left">
+					<b> Title: </b> @Model.Title
+					</br></br>
+					@if (Model.Author != null)
+					{
+						<b> Author: </b> @Model.Author
+						<br /><br />
+					}
+					@if (Model.PublishDate != null)
+					{
+						<b> Publish Date: </b> @Model.PublishDate
+						<br /><br />
+					}
+					@if (Model.Description != null)
+					{
+						<b> Description: </b> @Model.Description
+						<br /><br />
+					}
+					<b> Category: </b> @Model.Category.Name
+					</br></br>
+					<b> Book type: </b> @Model.Type
+					</br></br>
+					@if (Model.Location != null)
+					{
+						<b> Location: </b> @Model.Location
+						<br /><br />
+					}
+				</td>
+			</tr>
+		</table>
+		<input class="btn btn-primary" type="button" onclick="history.go(-1)" value="Back" />
+	</div>
+</div>
