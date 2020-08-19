@@ -16,7 +16,7 @@ namespace eLibrary.Controllers
 
         public IActionResult Index()
         {
-            return View("List");
+            return View();
         }
 
         public IActionResult Details(int id)
