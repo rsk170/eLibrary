@@ -4,7 +4,7 @@
 }
 <h2> Books </h2>
 <p>
-	@Html.ActionLink("New Book", "New", "Books", null, new { @class = "btn btn-primary" })
+	<a asp-action="New" asp-controller="Books" class="btn btn-primary"> New Book </a>
 </p>
 <p id="selectTriggerFilter"><label><b>Choose a category:</b></label><br></p>
 <table id="books" class="table table-bordered table-hover">

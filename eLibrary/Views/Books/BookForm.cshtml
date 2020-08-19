@@ -5,52 +5,74 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.PageTitle</h2>
-
-@using (Html.BeginForm("Save", "Books"))
+@if (Model.Id == 0)
 {
-	@Html.ValidationSummary(true, "Please fix all errors on this page.")
-	<div class="form-group">
-		@Html.LabelFor(b => b.Title, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.Title, new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.Title)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.Author, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.Author, new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.Author)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.Location, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.Location, new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.Location)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.PublishDate, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.PublishDate, "{0:d MMM yyyy}", new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.PublishDate)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.CategoryId, new { @class = "control-label" })
-		@Html.DropDownListFor(b => b.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Category", new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.CategoryId)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.Type, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.Type, new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.Type)
-	</div>
-	<div class="form-group">
-		@Html.LabelFor(b => b.Description, new { @class = "control-label" })
-		@Html.TextBoxFor(b => b.Description, new { @class = "form-control" })
-		@Html.ValidationMessageFor(b => b.Description)
-	</div>
-	@Html.HiddenFor(b => b.Id)
-	@Html.AntiForgeryToken()
-	<button type="submit" class="btn btn-primary"> Save </button>
+	<h2 class="col-md-10"> New Book</h2>
+}
+else
+{
+	<h2 class="col-md-10"> Edit Book </h2>
 }
 
-@section scripts
-{
+<form asp-controller="Books" asp-action="Save">
+	<div asp-validation-summary="ModelOnly">
+		<span> Please fix all errors on this page. </span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Title" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="Title" class="form-control" />
+			<span asp-validation-for="Title"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="Author" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="Author" class="form-control" />
+			<span asp-validation-for="Author"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="Location" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="Location" class="form-control" />
+			<span asp-validation-for="Location"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="PublishDate" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="PublishDate" asp-format="{0:d MMM yyyy}" class="form-control" />
+			<span asp-validation-for="PublishDate"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="CategoryId" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-control">
+				<option value="">Select Category</option>
+			</select>
+			<span asp-validation-for="CategoryId"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="Type" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="Type" class="form-control" />
+			<span asp-validation-for="Type"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label asp-for="Description" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="Description" class="form-control" />
+			<span asp-validation-for="Description"></span>
+		</div>
 
-}
+	</div>
+	<input asp-for="Id" type="hidden" />
+	<div class="col-md-10">
+		<button type="submit" class="col-md-2 btn btn-primary"> Save </button>
+	</div>
+</form>
+

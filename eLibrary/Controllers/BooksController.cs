@@ -1,5 +1,4 @@
-﻿using eLibrary.Data;
-using eLibrary.Entities.Models;
+﻿using eLibrary.Entities.Models;
 using eLibrary.Services;
 using eLibrary.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,7 @@ namespace eLibrary.Controllers
 {
     public class BooksController : Controller
     {
-        private BookService _books;
+        private readonly BookService _books;
 
         public BooksController(BookService books)
         {

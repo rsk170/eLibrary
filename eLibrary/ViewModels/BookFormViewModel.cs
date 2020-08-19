@@ -33,14 +33,6 @@ namespace eLibrary.ViewModels
 
         public bool Availability { get; set; }
 
-        public string PageTitle
-        {
-            get
-            {
-                return Id != 0 ? "Edit Book" : "New Book";
-            }
-        }
-
         public BookFormViewModel()
         {
             Id = 0;

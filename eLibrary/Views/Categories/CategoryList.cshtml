@@ -1,0 +1,79 @@
+﻿@{
+	ViewBag.Title = "Categories";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="margin:0 0 0 37%;"> Categories </h2>
+</br>
+<p>
+	<a asp-action="New" asp-controller="Categories" class="btn btn-primary" style="height: 50px; width: 200px; margin: 0 0 0 35%;"> New Categoty </a>
+</p>
+</br>
+<table id="categories" class="table table-bordered table-hover dt-responsive nowrap" width="80%" cellspacing="0" align="center">
+	<thead>
+		<tr>
+			<th> Title </th>
+			<th> Edit </th>
+			<th> Delete </th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+@section Styles
+{
+	<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts
+{
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			var table = $("#categories").DataTable({
+				"lengthMenu": [
+					[10, 25, 50, 100, -1],
+					[10, 25, 50, 100, "All"]
+				],
+				"dom": 'rtipS',
+				"searching": true,
+				"deferRender": true,
+				ajax: {
+					url: "/api/categories",
+					dataSrc: ""
+				},
+				columns: [
+					{
+						data: "name"
+					},
+					{
+						render: function (data, type, category) {
+							return '<a class="btn btn-info" href="/categories/edit/' + category.id + '">Edit</a>';
+						}
+					},
+					{
+						data: "id",
+						render: function (data) {
+							return "<button class='btn btn-danger btn-sm js-delete' data-category-id=" + data + ">Delete</button>";
+						}
+					}
+				]
+			});
+
+			$("#categories").on("click", ".js-delete", function () {
+				var button = $(this);
+
+				if (confirm("Are you sure you want to delete this category?")) {
+					$.ajax({
+						url: "/api/categories/" + button.attr("data-category-id"),
+						method: "DELETE",
+						success: function () {
+							table.row(button.parents("tr")).remove().draw();
+						}
+					});
+				}
+			});
+		});
+	</script>
+}
