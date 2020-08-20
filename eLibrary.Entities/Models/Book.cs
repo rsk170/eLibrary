@@ -31,5 +31,7 @@ namespace eLibrary.Entities.Models
         public string Type { get; set; }
 
         public bool Availability { get; set; }
+
+        public string BookImage { get; set; }
     }
 }

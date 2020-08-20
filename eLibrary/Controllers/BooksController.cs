@@ -1,7 +1,10 @@
 ﻿using eLibrary.Entities.Models;
 using eLibrary.Services;
 using eLibrary.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace eLibrary.Controllers
 {
@@ -53,13 +56,24 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(Book book)
+        public async Task<IActionResult> Save(Book book, IFormFile image)
         {
             if (!ModelState.IsValid)
             {
                 BookFormViewModel viewModel = InitializeViewModel(book);
 
                 return View("BookForm", viewModel);
+            }
+
+            if (image != null && image.Length > 0)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\books", fileName);
+                using (var fileSteam = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileSteam);
+                }
+                book.BookImage = fileName;
             }
 
             _books.SaveBook(book);

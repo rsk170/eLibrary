@@ -43,6 +43,7 @@ namespace eLibrary.Services
                 bookInDb.CategoryId = book.CategoryId;
                 bookInDb.Type = book.Type;
                 bookInDb.Description = book.Description;
+                bookInDb.BookImage = book.BookImage;
             }
 
             _context.SaveChanges();
@@ -69,6 +70,7 @@ namespace eLibrary.Services
                 Location = b.Location,
                 Description = b.Description,
                 Availability = b.Availability,
+                BookImage = b.BookImage,
             });
 
             return bookListingItemsQuery.ToList();

@@ -10,9 +10,18 @@
 	<div class="card-body">
 		<table>
 			<tr>
-				<td>
-					@*img*@
+				<td class="w-25">
+					@if (Model.BookImage == null)
+					{
+						<img class="img-responsive img-thumbnail rounded" src="@Url.Content("~/images/books/noBookImage.jpg")" alt="">
+					}
+					else
+					{
+						<img class="img-responsive img-thumbnail rounded" src="@Url.Content("~/images/books/" + @Model.BookImage)" alt="">
+					}
 				</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td style="vertical-align: top; text-align: left">
 					<b> Title: </b> @Model.Title
@@ -44,6 +53,7 @@
 				</td>
 			</tr>
 		</table>
+		<br /><br />
 		<input class="btn btn-primary" type="button" onclick="history.go(-1)" value="Back" />
 	</div>
 </div>

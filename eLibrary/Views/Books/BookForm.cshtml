@@ -68,7 +68,13 @@ else
 			<input asp-for="Description" class="form-control" />
 			<span asp-validation-for="Description"></span>
 		</div>
-
+	</div>
+	<div class="form-group">
+		<label asp-for="BookImage" class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<input asp-for="BookImage" accept="image/*" type="file" />
+		</div>
+		<span asp-validation-for="BookImage" class="text-danger"></span>
 	</div>
 	<input asp-for="Id" type="hidden" />
 	<div class="col-md-10">
