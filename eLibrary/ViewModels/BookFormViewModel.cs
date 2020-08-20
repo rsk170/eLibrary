@@ -35,7 +35,7 @@ namespace eLibrary.ViewModels
         public bool Availability { get; set; }
 
         [Display(Name = "Upload Photo")]
-        public string BookImage { get; set; }
+        public byte[] BookImage { get; set; }
 
         public BookFormViewModel()
         {

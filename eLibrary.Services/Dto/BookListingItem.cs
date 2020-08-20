@@ -22,6 +22,6 @@ namespace eLibrary.Dto.Services
 
         public bool Availability { get; set; }
 
-        public string BookImage { get; set; }
+        public byte[] BookImage { get; set; }
     }
 }

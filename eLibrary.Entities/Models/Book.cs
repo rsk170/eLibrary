@@ -32,6 +32,7 @@ namespace eLibrary.Entities.Models
 
         public bool Availability { get; set; }
 
-        public string BookImage { get; set; }
+        [Display(Name = "Upload Image")]
+        public byte[] BookImage { get; set; }
     }
 }

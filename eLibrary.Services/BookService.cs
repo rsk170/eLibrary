@@ -1,9 +1,12 @@
 ﻿using eLibrary.Data;
 using eLibrary.Dto.Services;
 using eLibrary.Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eLibrary.Services
 {
@@ -24,6 +27,21 @@ namespace eLibrary.Services
         public List<Category> GetCategories()
         {
             return _context.Categories.ToList();
+        }
+
+        public async Task AddImage(Book book, List<IFormFile> BookImage)
+        {
+            foreach (var item in BookImage)
+            {
+                if (item.Length > 0)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await item.CopyToAsync(stream);
+                        book.BookImage = stream.ToArray();
+                    }
+                }
+            }
         }
 
         public void SaveBook(Book book)
