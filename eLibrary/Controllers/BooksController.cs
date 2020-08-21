@@ -65,8 +65,7 @@ namespace eLibrary.Controllers
                 return View("BookForm", viewModel);
             }
 
-            await _books.AddImage(book, BookImage);
-            _books.SaveBook(book);
+            await _books.SaveBookAsync(book, BookImage);
 
             return RedirectToAction("Index", "Books");
         }

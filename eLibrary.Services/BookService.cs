@@ -29,7 +29,7 @@ namespace eLibrary.Services
             return _context.Categories.ToList();
         }
 
-        public async Task AddImage(Book book, List<IFormFile> BookImage)
+        public async Task SaveBookAsync(Book book, List<IFormFile> BookImage)
         {
             foreach (var item in BookImage)
             {
@@ -42,10 +42,7 @@ namespace eLibrary.Services
                     }
                 }
             }
-        }
 
-        public void SaveBook(Book book)
-        {
             if (book.Id == 0)
             {
                 book.Availability = true;
