@@ -1,9 +1,12 @@
 ﻿using eLibrary.Data;
 using eLibrary.Dto.Services;
 using eLibrary.Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eLibrary.Services
 {
@@ -26,8 +29,18 @@ namespace eLibrary.Services
             return _context.Categories.ToList();
         }
 
-        public void SaveBook(Book book)
+        public async Task SaveBookAsync(Book book, IFormFile bookImage)
         {
+            if (bookImage != null && bookImage.Length > 0)
+            {
+                book.ImageType = bookImage.ContentType;
+                using (var stream = new MemoryStream())
+                {
+                    await bookImage.CopyToAsync(stream);
+                    book.BookImage = stream.ToArray();
+                }
+            }
+
             if (book.Id == 0)
             {
                 book.Availability = true;
@@ -43,9 +56,11 @@ namespace eLibrary.Services
                 bookInDb.CategoryId = book.CategoryId;
                 bookInDb.Type = book.Type;
                 bookInDb.Description = book.Description;
+                bookInDb.BookImage = book.BookImage;
+                bookInDb.ImageType = book.ImageType;
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public List<BookListingItem> GetAllBooks(string query = null)
@@ -69,6 +84,7 @@ namespace eLibrary.Services
                 Location = b.Location,
                 Description = b.Description,
                 Availability = b.Availability,
+                BookImage = b.BookImage,
             });
 
             return bookListingItemsQuery.ToList();

@@ -1,4 +1,5 @@
 ﻿using eLibrary.Entities.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -33,6 +34,9 @@ namespace eLibrary.ViewModels
 
         public bool Availability { get; set; }
 
+        [Display(Name = "Upload Photo")]
+        public byte[] BookImage { get; set; }
+
         public BookFormViewModel()
         {
             Id = 0;
@@ -49,6 +53,7 @@ namespace eLibrary.ViewModels
             Description = book.Description;
             Type = book.Type;
             Availability = book.Availability;
+            BookImage = book.BookImage;
         }
     }
 }

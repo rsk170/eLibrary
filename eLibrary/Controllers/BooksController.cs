@@ -1,7 +1,10 @@
 ﻿using eLibrary.Entities.Models;
 using eLibrary.Services;
 using eLibrary.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace eLibrary.Controllers
 {
@@ -53,7 +56,7 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Save(Book book)
+        public async Task<IActionResult> SaveAsync(Book book, IFormFile bookImage)
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +65,7 @@ namespace eLibrary.Controllers
                 return View("BookForm", viewModel);
             }
 
-            _books.SaveBook(book);
+            await _books.SaveBookAsync(book, bookImage);
 
             return RedirectToAction("Index", "Books");
         }

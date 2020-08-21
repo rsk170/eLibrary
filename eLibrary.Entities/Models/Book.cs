@@ -31,5 +31,10 @@ namespace eLibrary.Entities.Models
         public string Type { get; set; }
 
         public bool Availability { get; set; }
+
+        [Display(Name = "Upload Image")]
+        public byte[] BookImage { get; set; }
+
+        public string ImageType { get; set; }
     }
 }

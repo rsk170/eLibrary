@@ -78,3 +78,7 @@ body {
 .input-validation-error{
     border: 2px solid red;
 }
+
+a#previous-page {
+    margin-top: 30px;
+}

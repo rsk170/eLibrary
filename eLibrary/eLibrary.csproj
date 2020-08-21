@@ -23,4 +23,8 @@
     <ProjectReference Include="..\eLibrary.Services\eLibrary.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\books\" />
+  </ItemGroup>
+
 </Project>
