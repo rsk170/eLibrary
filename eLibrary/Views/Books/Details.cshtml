@@ -11,17 +11,7 @@
 		<table>
 			<tr>
 				<td class="w-25">
-					@{ string source; }
-					@if (Model.BookImage == null)
-					{
-						source = @Url.Content("~/images/books/noBookImage.jpg");
-					}
-					else
-					{
-						source = "data:image; base64," + @System.Convert.ToBase64String(Model.BookImage);
-					}
-
-					<img class="img-responsive img-thumbnail rounded" src="@source" alt="">
+					<img class="img-responsive img-thumbnail rounded" src="@Url.Action("Book", "Images", new { id = Model.Id })" alt="">
 				</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>

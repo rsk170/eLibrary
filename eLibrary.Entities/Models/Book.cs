@@ -34,5 +34,7 @@ namespace eLibrary.Entities.Models
 
         [Display(Name = "Upload Image")]
         public byte[] BookImage { get; set; }
+
+        public string ImageType { get; set; }
     }
 }

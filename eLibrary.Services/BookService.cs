@@ -29,17 +29,15 @@ namespace eLibrary.Services
             return _context.Categories.ToList();
         }
 
-        public async Task SaveBookAsync(Book book, List<IFormFile> BookImage)
+        public async Task SaveBookAsync(Book book, IFormFile bookImage)
         {
-            foreach (var item in BookImage)
+            if (bookImage != null && bookImage.Length > 0)
             {
-                if (item.Length > 0)
+                book.ImageType = bookImage.ContentType;
+                using (var stream = new MemoryStream())
                 {
-                    using (var stream = new MemoryStream())
-                    {
-                        await item.CopyToAsync(stream);
-                        book.BookImage = stream.ToArray();
-                    }
+                    await bookImage.CopyToAsync(stream);
+                    book.BookImage = stream.ToArray();
                 }
             }
 
@@ -59,9 +57,10 @@ namespace eLibrary.Services
                 bookInDb.Type = book.Type;
                 bookInDb.Description = book.Description;
                 bookInDb.BookImage = book.BookImage;
+                bookInDb.ImageType = book.ImageType;
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public List<BookListingItem> GetAllBooks(string query = null)
