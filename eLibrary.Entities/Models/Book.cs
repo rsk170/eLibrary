@@ -36,5 +36,8 @@ namespace eLibrary.Entities.Models
         public byte[] BookImage { get; set; }
 
         public string ImageType { get; set; }
+
+        [Display(Name = "Upload PDF file")]
+        public byte[] PdfFile { get; set; }
     }
 }

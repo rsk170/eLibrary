@@ -29,7 +29,7 @@ namespace eLibrary.Services
             return _context.Categories.ToList();
         }
 
-        public async Task SaveBookAsync(Book book, IFormFile bookImage)
+        public async Task SaveBookAsync(Book book, IFormFile bookImage, IFormFile pdfFile)
         {
             if (bookImage != null && bookImage.Length > 0)
             {
@@ -38,6 +38,15 @@ namespace eLibrary.Services
                 {
                     await bookImage.CopyToAsync(stream);
                     book.BookImage = stream.ToArray();
+                }
+            }
+
+            if (pdfFile != null && pdfFile.Length > 0)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    await pdfFile.CopyToAsync(stream);
+                    book.PdfFile = stream.ToArray();
                 }
             }
 
@@ -56,8 +65,15 @@ namespace eLibrary.Services
                 bookInDb.CategoryId = book.CategoryId;
                 bookInDb.Type = book.Type;
                 bookInDb.Description = book.Description;
-                bookInDb.BookImage = book.BookImage;
-                bookInDb.ImageType = book.ImageType;
+                if (book.BookImage != null)
+                {
+                    bookInDb.BookImage = book.BookImage;
+                    bookInDb.ImageType = book.ImageType;
+                }
+                if (book.PdfFile != null)
+                {
+                    bookInDb.PdfFile = book.PdfFile;
+                }
             }
 
             await _context.SaveChangesAsync();
