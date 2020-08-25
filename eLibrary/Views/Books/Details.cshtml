@@ -49,6 +49,20 @@
 								@Model.Location
 							</li>
 						}
+						@if (Model.Type == "e-book")
+						{
+							<li class="list-group-item">
+								<b> Download book: </b>
+								@if (Model.PDFFile == null)
+								{
+									<span> PDF not available. </span>
+								}
+								else
+								{
+									<a href="" onclick="window.open('@Url.Action("PDF", "PDFs", new { id = Model.Id })', '_blank')"> Click here </a>
+								}
+							</li>
+						}
 					</ul>
 				</td>
 			</tr>

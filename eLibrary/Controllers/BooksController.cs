@@ -56,7 +56,7 @@ namespace eLibrary.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveAsync(Book book, IFormFile bookImage)
+        public async Task<IActionResult> SaveAsync(Book book, IFormFile bookImage, IFormFile pdfFile)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace eLibrary.Controllers
                 return View("BookForm", viewModel);
             }
 
-            await _books.SaveBookAsync(book, bookImage);
+            await _books.SaveBookAsync(book, bookImage, pdfFile);
 
             return RedirectToAction("Index", "Books");
         }
