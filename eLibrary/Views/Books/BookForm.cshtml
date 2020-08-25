@@ -79,11 +79,11 @@ else
 	@if (Model.Type != "hard-copy" || Model.Type != "hard copy")
 	{
 		<div class="form-group">
-			<label asp-for="PDFFile" class="col-md-2 control-label"></label>
+			<label asp-for="PdfFile" class="col-md-2 control-label"></label>
 			<div class="col-md-10">
-				<input asp-for="PDFFile" accept="application/pdf*" type="file" data-msg-accept="Please enter a PDF file." />
+				<input asp-for="PdfFile" accept="application/pdf*" type="file" data-msg-accept="Please enter a PDF file." />
 			</div>
-			<span asp-validation-for="PDFFile" class="text-danger"></span>
+			<span asp-validation-for="PdfFile" class="text-danger"></span>
 		</div>
 	}
 	<input asp-for="Id" type="hidden" />

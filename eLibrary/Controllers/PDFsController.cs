@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eLibrary.Controllers
 {
-    public class PDFsController : Controller
+    public class PdfsController : Controller
     {
         private readonly BookService _books;
 
-        public PDFsController(BookService books)
+        public PdfsController(BookService books)
         {
             _books = books;
         }
 
-        public ActionResult PDF(int id)
+        public ActionResult Pdf(int id)
         {
             var book = _books.GetBook(id);
             if (book == null)
@@ -20,8 +20,8 @@ namespace eLibrary.Controllers
                 return NotFound();
             }
 
-            var pdf = book.PDFFile;
-            return File(pdf, "application/pdf");
+            var pdf = book.PdfFile;
+            return File(pdf, System.Net.Mime.MediaTypeNames.Application.Pdf);
         }
     }
 }

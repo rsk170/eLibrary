@@ -31,7 +31,7 @@ namespace eLibrary.Services
 
         public async Task SaveBookAsync(Book book, IFormFile bookImage, IFormFile pdfFile)
         {
-            if ((bookImage != null && bookImage.Length > 0))
+            if (bookImage != null && bookImage.Length > 0)
             {
                 book.ImageType = bookImage.ContentType;
                 using (var stream = new MemoryStream())
@@ -46,7 +46,7 @@ namespace eLibrary.Services
                 using (var stream = new MemoryStream())
                 {
                     await pdfFile.CopyToAsync(stream);
-                    book.PDFFile = stream.ToArray();
+                    book.PdfFile = stream.ToArray();
                 }
             }
 
@@ -70,9 +70,9 @@ namespace eLibrary.Services
                     bookInDb.BookImage = book.BookImage;
                     bookInDb.ImageType = book.ImageType;
                 }
-                if (book.PDFFile != null)
+                if (book.PdfFile != null)
                 {
-                    bookInDb.PDFFile = book.PDFFile;
+                    bookInDb.PdfFile = book.PdfFile;
                 }
             }
 
@@ -101,7 +101,6 @@ namespace eLibrary.Services
                 Description = b.Description,
                 Availability = b.Availability,
                 BookImage = b.BookImage,
-                PDFFile = b.PDFFile,
             });
 
             return bookListingItemsQuery.ToList();

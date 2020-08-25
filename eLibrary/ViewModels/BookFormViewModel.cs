@@ -38,8 +38,7 @@ namespace eLibrary.ViewModels
         public byte[] BookImage { get; set; }
 
         [Display(Name = "Upload PDF File")]
-        public byte[] PDFFile { get; set; }
-
+        public byte[] PdfFile { get; set; }
 
         public BookFormViewModel()
         {
@@ -58,7 +57,7 @@ namespace eLibrary.ViewModels
             Type = book.Type;
             Availability = book.Availability;
             BookImage = book.BookImage;
-            PDFFile = book.PDFFile;
+            PdfFile = book.PdfFile;
         }
     }
 }

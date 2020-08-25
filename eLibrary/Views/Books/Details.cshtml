@@ -53,13 +53,13 @@
 						{
 							<li class="list-group-item">
 								<b> Download book: </b>
-								@if (Model.PDFFile == null)
+								@if (Model.PdfFile == null)
 								{
 									<span> PDF not available. </span>
 								}
 								else
 								{
-									<a href="" onclick="window.open('@Url.Action("PDF", "PDFs", new { id = Model.Id })', '_blank')"> Click here </a>
+									<a href="" target="_blank" onclick="window.open('@Url.Action("Pdf", "Pdfs", new { id = Model.Id })')"> Click here </a>
 								}
 							</li>
 						}
