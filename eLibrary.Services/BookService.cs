@@ -63,7 +63,7 @@ namespace eLibrary.Services
                 bookInDb.Location = book.Location;
                 bookInDb.PublishDate = book.PublishDate;
                 bookInDb.CategoryId = book.CategoryId;
-                bookInDb.Type = book.Type;
+                bookInDb.BookType = book.BookType;
                 bookInDb.Description = book.Description;
                 if (book.BookImage != null)
                 {
@@ -94,7 +94,7 @@ namespace eLibrary.Services
                 Id = b.Id,
                 Title = b.Title,
                 Author = b.Author,
-                Type = b.Type,
+                BookType = b.BookType,
                 PublishDate = b.PublishDate,
                 Category = b.Category.Name,
                 Location = b.Location,

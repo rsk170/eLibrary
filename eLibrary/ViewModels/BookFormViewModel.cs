@@ -1,5 +1,4 @@
 ﻿using eLibrary.Entities.Models;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace eLibrary.ViewModels
 {
     public class BookFormViewModel
-    {
+    { 
         public IEnumerable<Category> Categories { get; set; }
 
         public int Id { get; set; }
@@ -30,7 +29,8 @@ namespace eLibrary.ViewModels
         public string Description { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        [Display(Name = "Type")]
+        public BookTypes? BookType { get; set; }
 
         public bool Availability { get; set; }
 
@@ -54,7 +54,7 @@ namespace eLibrary.ViewModels
             Location = book.Location;
             PublishDate = book.PublishDate;
             Description = book.Description;
-            Type = book.Type;
+            BookType = book.BookType;
             Availability = book.Availability;
             BookImage = book.BookImage;
             PdfFile = book.PdfFile;

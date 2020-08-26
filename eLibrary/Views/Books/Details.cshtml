@@ -1,4 +1,5 @@
 ﻿@model eLibrary.Entities.Models.Book
+@using eLibrary.Entities.Models
 
 @{
 	ViewBag.Title = Model.Title;
@@ -41,7 +42,7 @@
 							</li>
 						}
 						<li class="list-group-item"><b> Category: </b> @Model.Category.Name </li>
-						<li class="list-group-item"><b> Book type: </b> @Model.Type </li>
+						<li class="list-group-item"><b> Book type: </b> @Model.BookType.GetDisplayName() </li>
 						@if (Model.Location != null)
 						{
 							<li class="list-group-item">
@@ -49,7 +50,7 @@
 								@Model.Location
 							</li>
 						}
-						@if (Model.Type == "e-book")
+						@if (Model.BookType == BookTypes.EBook)
 						{
 							<li class="list-group-item">
 								<b> Download book: </b>

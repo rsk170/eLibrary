@@ -80,7 +80,14 @@
 						data: "publishDate"
 					},
 					{
-						data: "type"
+						data: "bookType",
+						render: function (data, type, row, meta) {
+							if (data == 0) {
+								return "hard copy";
+							} else if (data == 1) {
+								return "e-book";
+							}
+						}
 					},
 					{
 						data: "availability",
