@@ -11,6 +11,18 @@
 	<Compile Remove="Data\Migrations\20200820112912_RemoveBookImage.Designer.cs" />
 	<Compile Remove="Data\Migrations\20200820113727_RemoveImageType.cs" />
 	<Compile Remove="Data\Migrations\20200820113727_RemoveImageType.Designer.cs" />
+	<Compile Remove="Data\Migrations\20200825131727_CopyBookTypes.cs" />
+	<Compile Remove="Data\Migrations\20200825131727_CopyBookTypes.Designer.cs" />
+	<Compile Remove="Data\Migrations\20200825133648_MakeEnumString.cs" />
+	<Compile Remove="Data\Migrations\20200825133648_MakeEnumString.Designer.cs" />
+	<Compile Remove="Data\Migrations\20200825134205_CopyBookType.cs" />
+	<Compile Remove="Data\Migrations\20200825134205_CopyBookType.Designer.cs" />
+	<Compile Remove="Data\Migrations\20200826091123_UpdateBookTypeColumn.cs" />
+	<Compile Remove="Data\Migrations\20200826091123_UpdateBookTypeColumn.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Models\ggvhjvo4.htv~" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +31,7 @@
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
 	<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.6" />
+	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
 </Project>

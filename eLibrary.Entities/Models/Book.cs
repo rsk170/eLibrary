@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Newtonsoft.Json.Converters;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace eLibrary.Entities.Models
 {
@@ -28,7 +31,8 @@ namespace eLibrary.Entities.Models
         public string Description { get; set; }
 
         [Required]
-        public string Type { get; set; }
+        [Display(Name = "Type")]
+        public BookTypes BookType { get; set; }
 
         public bool Availability { get; set; }
 

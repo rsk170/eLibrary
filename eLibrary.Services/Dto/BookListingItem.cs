@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eLibrary.Entities.Models;
+using System;
 
 namespace eLibrary.Dto.Services
 {
@@ -18,10 +19,10 @@ namespace eLibrary.Dto.Services
 
         public string Description { get; set; }
 
-        public string Type { get; set; }
-
         public bool Availability { get; set; }
 
         public byte[] BookImage { get; set; }
+
+        public BookTypes BookType { get; set; }
     }
 }
