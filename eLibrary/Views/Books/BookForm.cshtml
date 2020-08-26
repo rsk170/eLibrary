@@ -59,7 +59,7 @@ else
 	<div class="form-group">
 		<label asp-for="BookType" class="col-md-2 control-label"></label>
 		<div class="col-md-10">
-			<select asp-for="BookType" asp-items="@Html.GetEnumSelectList<BookTypes>()" class="form-control" id="SelectDiv">
+			<select asp-for="BookType" asp-items="@Html.GetEnumSelectList<BookTypes>()" class="form-control" id="book-type-select">
 				<option selected="selected" value="">Select book type</option>
 			</select>
 			<span asp-validation-for="BookType"></span>
@@ -79,7 +79,7 @@ else
 			<span asp-validation-for="BookImage" class="text-danger"></span>
 		</div>
 	</div>
-	<div id="DivContainer">
+	<div id="pdf-uploader-container">
 		<div class="form-group">
 			<label asp-for="PdfFile" class="col-md-2 control-label"></label>
 			<div class="col-md-10">
@@ -98,20 +98,21 @@ else
 {
 	<script>
 		$(function () {
-			if ($("#SelectDiv option:selected").val() == "1") {
-				$("#DivContainer").show();
+			var pdfContainer = $("#pdf-uploader-container");
+			if ($("#book-type-select option:selected").val() == "1") {
+				pdfContainer.show();
 			}
 			else {
-				$("#DivContainer").hide();
+				pdfContainer.hide();
 			}
 
-			$("#SelectDiv").change(function () {
+			$("#book-type-select").change(function () {
 				var val = $(this).val();
 				if (val == "1") {
-					$("#DivContainer").show();
+					pdfContainer.show();
 				}
 				else {
-					$("#DivContainer").hide();
+					pdfContainer.hide();
 				}
 			});
 		});
