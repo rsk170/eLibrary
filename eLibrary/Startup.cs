@@ -8,6 +8,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using eLibrary.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+using eLibrary.Code;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace eLibrary
 {
@@ -33,6 +39,26 @@ namespace eLibrary
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftWebApp(options =>
+                {
+                    Configuration.Bind("AzureAd", options);
+                }, options =>
+                {
+                    options.EventsType = typeof(CustomCookieAuthenticationEvents);
+                });
+
+            services.AddScoped<CustomCookieAuthenticationEvents>();
+
+            services.AddRazorPages().AddMvcOptions(options =>
+            {
+                var policy =
+                    new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            }).AddMicrosoftIdentityUI();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

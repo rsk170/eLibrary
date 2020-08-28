@@ -19,6 +19,8 @@
 	<Compile Remove="Data\Migrations\20200825134205_CopyBookType.Designer.cs" />
 	<Compile Remove="Data\Migrations\20200826091123_UpdateBookTypeColumn.cs" />
 	<Compile Remove="Data\Migrations\20200826091123_UpdateBookTypeColumn.Designer.cs" />
+	<Compile Remove="Data\Migrations\20200828104538_ModifyUserTable.cs" />
+	<Compile Remove="Data\Migrations\20200828104538_ModifyUserTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.2.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.7" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
 	<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.6" />
+	<PackageReference Include="Microsoft.Identity.Web" Version="0.2.3-preview" />
+	<PackageReference Include="Microsoft.Identity.Web.UI" Version="0.2.3-preview" />
 	<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
