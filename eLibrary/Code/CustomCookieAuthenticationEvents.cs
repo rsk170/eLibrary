@@ -14,14 +14,15 @@ namespace eLibrary.Code
         {
             _context = context;
         }
+
         public override Task SignedIn(CookieSignedInContext context)
         {
-            var claim = context.Principal.FindFirst("preferred_username").Value;
+            var usernameClaim = context.Principal.FindFirst("preferred_username").Value;
 
-            if (!_context.Users.Any(u => u.Username.Equals(claim)))
+            if (!_context.Users.Any(u => u.Username.Equals(usernameClaim)))
             {
                 User user = new User();
-                user.Username = claim;
+                user.Username = usernameClaim;
                 _context.Users.Add(user);
                 _context.SaveChanges();
             }
