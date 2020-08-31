@@ -84,3 +84,7 @@ body {
 a#previous-page {
 	margin-top: 30px;
 }
+
+li#checked-out {
+	background-color: #e0ebeb;
+}

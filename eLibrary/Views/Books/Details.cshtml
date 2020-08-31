@@ -1,4 +1,4 @@
-﻿@model eLibrary.Entities.Models.Book
+﻿@model eLibrary.Services.Dto.BookDetailsDto
 @using eLibrary.Entities.Models
 
 @{
@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<td class="w-25">
-					<img class="img-responsive img-thumbnail rounded" src="@Url.Action("Book", "Images", new { id = Model.Id })" alt="">
+					<img class="img-responsive img-thumbnail rounded" src="@Url.Action("Book", "Images", new { id = Model.BookId })" alt="">
 				</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
@@ -54,15 +54,33 @@
 						{
 							<li class="list-group-item">
 								<b> Download book: </b>
-								@if (Model.PdfFile == null)
-								{
-									<span> PDF not available. </span>
-								}
-								else
-								{
-									<a href="" target="_blank" onclick="window.open('@Url.Action("Pdf", "Pdfs", new { id = Model.Id })')"> Click here </a>
-								}
+								<a href="" target="_blank" onclick="window.open('@Url.Action("Pdf", "Pdfs", new { id = Model.BookId })')"> Click here </a>
 							</li>
+						}
+						else if (Model.BookType == BookTypes.HardCopy)
+						{
+							if (Model.Availability)
+							{
+								<li class="list-group-item">
+									<button data-id="@Model.BookId" class="btn btn-primary" id="check-out"> Check out</button>
+								</li>
+							}
+							else
+							{
+								<li class="list-group-item" id="checked-out">
+									<b> Checked out by: </b>
+									@Model.BorrowedBook.Username
+								</li>
+								<li class="list-group-item" id="checked-out">
+									<b> From date: </b>
+									@Model.BorrowedBook.DateBorrowed
+								</li>
+
+								<li class="list-group-item" id="checked-out">
+									<b> To date: </b>
+									@Model.BorrowedBook.DateReturned
+								</li>
+							}
 						}
 					</ul>
 				</td>
@@ -71,3 +89,21 @@
 		<a asp-action="Index" asp-controller="Books" class="btn btn-outline-dark" id="previous-page"> Go Back </a>
 	</div>
 </div>
+
+@section Scripts{
+	<script>
+		$(document).ready(function () {
+			$("#check-out").on("click", function () {
+				var button = $(this);
+				$.ajax({
+					url: "/api/borrowed/" + button.attr("data-id"),
+					method: "POST",
+					success: function (data) {
+						console.log("success");
+					}
+				});
+			});
+		});
+
+	</script>
+}

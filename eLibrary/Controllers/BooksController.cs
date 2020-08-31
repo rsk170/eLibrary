@@ -3,7 +3,6 @@ using eLibrary.Services;
 using eLibrary.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace eLibrary.Controllers
@@ -11,10 +10,12 @@ namespace eLibrary.Controllers
     public class BooksController : Controller
     {
         private readonly BookService _books;
+        private readonly BorrowedBookDetailsService _borrowedBookDetails;
 
-        public BooksController(BookService books)
+        public BooksController(BookService books, BorrowedBookDetailsService borrowedBookDetails)
         {
             _books = books;
+            _borrowedBookDetails = borrowedBookDetails;
         }
 
         public IActionResult Index()
@@ -24,12 +25,11 @@ namespace eLibrary.Controllers
 
         public IActionResult Details(int id)
         {
-            Book book = _books.GetBook(id);
-
-            if (book == null)
+            var bookDetails = _borrowedBookDetails.GetBorrowedBookDetails(id);
+            if (bookDetails == null)
                 return NotFound();
 
-            return View(book);
+            return View(bookDetails);
         }
 
         public IActionResult New()
