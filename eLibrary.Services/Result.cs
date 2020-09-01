@@ -9,4 +9,10 @@ namespace eLibrary.Services
         Success,
         NotFound,
     }
+
+    public enum BorrowResult
+    {
+        Success,
+        NotAvailable,
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using eLibrary.Entities.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Permissions;
 
 namespace eLibrary.Data
 {
@@ -11,6 +12,8 @@ namespace eLibrary.Data
         public DbSet<Category> Categories { get; set; }
 
         public  DbSet<User> Users { get; set; }
+
+        public DbSet<BorrowedBook> BorrowedBooks { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

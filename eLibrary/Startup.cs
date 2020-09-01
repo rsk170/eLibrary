@@ -34,6 +34,8 @@ namespace eLibrary
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<BookService>();
             services.AddScoped<CategoryService>();
+            services.AddScoped<BorrowedBookDetailsService>();
+            services.AddScoped<BorrowedBooksService>();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
