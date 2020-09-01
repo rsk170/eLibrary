@@ -8,6 +8,7 @@ namespace eLibrary.Services
     {
         Success,
         NotFound,
+        NoPermission
     }
 
     public enum BorrowResult

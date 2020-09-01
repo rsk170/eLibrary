@@ -3,6 +3,7 @@ using eLibrary.Entities.Models;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace eLibrary.Services
 {
@@ -47,6 +48,31 @@ namespace eLibrary.Services
             _context.SaveChanges();
 
             return BorrowResult.Success;
+        }
+
+        public Result Return(int id)
+        {
+            var username = _httpContext.HttpContext.User.Identity.Name;
+            Book book = _context.Books.Single(b => b.Id == id);
+            User user = _context.Users.Single(u => u.Username == username);
+            var borrowedBook = _context.BorrowedBooks.FirstOrDefault(b => b.Book.Id == id);
+
+            if(book == null || borrowedBook == null)
+            {
+                return Result.NotFound;
+            }
+
+            if (borrowedBook.User == user)
+            {
+                book.Availability = true;
+                _context.BorrowedBooks.Remove(borrowedBook);
+                _context.SaveChanges();
+                return Result.Success;
+            }
+            else
+            {
+                return Result.NoPermission;
+            }
         }
     }
 }

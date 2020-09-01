@@ -80,6 +80,9 @@
 									<b> To date: </b>
 									@Model.BorrowedBook.DateReturned
 								</li>
+								<li class="list-group-item">
+									<button data-id="@Model.BookId" class="btn btn-primary" id="return"> Return </button>
+								</li>
 							}
 						}
 					</ul>
@@ -103,7 +106,17 @@
 					}
 				});
 			});
-		});
 
+			$("#return").on("click", function () {
+				var button = $(this);
+				$.ajax({
+					url: "/api/borrowed/" + button.attr("data-id"),
+					method: "DELETE",
+					success: function (data) {
+						console.log("success");
+					}
+				});
+			});
+		});
 	</script>
 }

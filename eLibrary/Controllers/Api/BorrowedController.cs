@@ -1,4 +1,5 @@
-﻿using eLibrary.Services;
+﻿using AutoMapper.Configuration.Conventions;
+using eLibrary.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eLibrary.Controllers.Api
@@ -20,6 +21,23 @@ namespace eLibrary.Controllers.Api
             if (_borrowedBooks.Borrow(id) == BorrowResult.NotAvailable)
             {
                 return BadRequest("Book is not available.");
+            }
+            else
+            {
+                return Ok();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Return(int id)
+        {
+            if (_borrowedBooks.Return(id) == Result.NotFound)
+            {
+                return NotFound();
+            }
+            else if (_borrowedBooks.Return(id) == Result.NoPermission)
+            {
+                return BadRequest("You can't perform this action.");
             }
             else
             {

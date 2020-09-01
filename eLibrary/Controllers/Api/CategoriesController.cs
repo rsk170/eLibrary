@@ -20,7 +20,6 @@ namespace eLibrary.Controllers.Api
             return Ok(items);
         }
 
-        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
             if (_categories.DeleteCategory(id) == Result.NotFound)
